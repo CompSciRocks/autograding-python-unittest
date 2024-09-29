@@ -16,8 +16,8 @@ function getInputs() {
     const testName = core.getInput('test-name');
     const testClass = core.getInput('test-class');
     const setupCommand = core.getInput('setup-command');
-    const timeout = core.getInput('timeout');
-    const maxScore = core.getInput('max-score');
+    const timeout = parseInt(core.getInput('timeout'));
+    const maxScore = parseFloat(core.getInput('max-score'));
     const partialCredit = core.getInput('partial-credit');
     const testDir = core.getInput('test-dir');
 
