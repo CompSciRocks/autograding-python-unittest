@@ -204,11 +204,11 @@ function runTests(inputs) {
 
     let json = parser.parse(data);
 
-    let testCount = json.testsuites.testsuite['@_tests'];
-    let failureCount = json.testsuites.testsuite['@_failures'];
-    let errorCount = json.testsuites.testsuite['@_errors'];
-    let skippedCount = json.testsuites.testsuite['@_skipped'];
-    let time = json.testsuites.testsuite['@_time'];
+    let testCount = parseInt(json.testsuites.testsuite['@_tests']);
+    let failureCount = parseInt(json.testsuites.testsuite['@_failures']);
+    let errorCount = parseInt(json.testsuites.testsuite['@_errors']);
+    let skippedCount = parseInt(json.testsuites.testsuite['@_skipped']);
+    let time = parseFloat(json.testsuites.testsuite['@_time']);
 
     if (testCount < 1) {
         core.setFailed('No tests found');
