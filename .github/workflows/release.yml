@@ -20,7 +20,7 @@ jobs:
           git config --global user.name "Ryan Nutt"
       - name: Run build
         run: |
-          npm install --silent
+          npm install
           npm run build
           git add dist/
           git commit -m "Releasing" --allow-empty
