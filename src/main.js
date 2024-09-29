@@ -210,8 +210,6 @@ function runTests(inputs) {
     let skippedCount = parseInt(json.testsuites.testsuite['@_skipped']);
     let time = parseFloat(json.testsuites.testsuite['@_time']);
 
-    console.log(testCount, failureCount, errorCount, skippedCount, time);
-
     if (testCount < 1) {
         core.setFailed('No tests found');
 
@@ -244,8 +242,6 @@ function runTests(inputs) {
     } else if (testCount > 0) {
         testScore = inputs.maxScore;
     }
-
-    console.log('testScore', testScore);
 
     // Parse the XML/JSON and build the results    
     let markdown = '';
@@ -297,7 +293,7 @@ function runTests(inputs) {
 
     const result = {
         version: 1,
-        status: 'pass',
+        status: totalFailed > 0 ? 'fail' : 'pass',
         max_score: inputs.maxScore,
         markdown: btoa(markdown),
         tests: [{
