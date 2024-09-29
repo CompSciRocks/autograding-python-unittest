@@ -252,7 +252,7 @@ function runTests(inputs) {
         colWidths: [30, 50],
     });
 
-    json.testsuite.testcase.forEach(test => {
+    json.testsuites.testsuite.testcase.forEach(test => {
         if (test.failure) {
             markdown += '| ' + test['@_name'] + ' | ' + test.failure['@_message'] + ' | \n';
             table.push([test['@_name'], test.failure['@_message']]);
