@@ -19,16 +19,16 @@
     "cli-table3": "^0.6.5"
   },
   "devDependencies": {
-    "esbuild": "^0.23.1",
+    "esbuild": "0.19.5",
     "esbuild-plugin-babel": "^0.2.3",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.30.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-promise": "^6.1.1",
     "jest": "^29.7.0",
-    "prettier": "^3.3.3"
+    "prettier": "3.0.3"
   }
 }
