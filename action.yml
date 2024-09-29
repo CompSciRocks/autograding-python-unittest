@@ -1,0 +1,42 @@
+name: "GitHub Classroom Python unittest Autograder"
+author: "RyanNutt"
+description: "A GitHub Action for running Python unittests in a GitHub Classroom assignment"
+inputs:
+  test-name:
+    description: "Unique identifier for this test"
+    required: true
+  setup-command:
+    description: "The command to run before running the tests"
+    required: false
+    default: ""
+  timeout:
+    description: "The maximum time in minutes to run the tests"
+    required: false
+    default: "2"
+  test-class:
+    description: "The name of the test class to run, including the filename. Will discover if empty"
+    required: false
+    default: ""
+  max-score:
+    description: "The maximum score for this test"
+    required: false
+    default: "0"
+  partial-credit:
+    description: "Whether to give partial credit for passing some tests"
+    required: false
+    default: "true"
+  test-dir:
+    description: "The directory containing the tests"
+    required: false
+    default: ""
+  timezone:
+    description: "The timezone to use for the timestamp"
+    required: false
+    default: "America/Chicago"
+outputs:
+  result:
+    description: "The result of the autograder"
+
+runs:
+  using: "node20"
+  main: "dist/main.js"
