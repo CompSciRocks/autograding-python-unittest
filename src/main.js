@@ -245,6 +245,8 @@ function runTests(inputs) {
         testScore = inputs.maxScore;
     }
 
+    console.log('testScore', testScore);
+
     // Parse the XML/JSON and build the results    
     let markdown = '';
     let text = '';
