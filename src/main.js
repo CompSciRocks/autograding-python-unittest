@@ -57,10 +57,10 @@ function buildResults(xmlFile) {
 
     let json = parser.parse(data);
 
-    let testCount = json.testsuite['@_tests'];
-    let failureCount = json.testsuite['@_failures'];
-    let errorCount = json.testsuite['@_errors'];
-    let skippedCount = json.testsuite['@_skipped'];
+    let testCount = json.testsuites.testsuite['@_tests'];
+    let failureCount = json.testsuites.testsuite['@_failures'];
+    let errorCount = json.testsuites.testsuite['@_errors'];
+    let skippedCount = json.testsuites.testsuite['@_skipped'];
 
 }
 
@@ -153,7 +153,7 @@ function runTests(inputs) {
             runCommand += ` ${inputs.testClass}`;
         }
     } else {
-        runCommand += ` discover`;
+        runCommand += ` `;
     }
 
     const testCommand = `${runCommand} --junitxml=.unittest-results.xml`;
