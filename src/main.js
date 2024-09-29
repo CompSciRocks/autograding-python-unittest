@@ -253,25 +253,12 @@ function runTests(inputs) {
         colWidths: [30, 50],
     });
 
-    if (json.testsuites.testsuite.testcase.length) {
-        json.testsuites.testsuite.testcase.forEach(test => {
-            if (test.failure) {
-                markdown += '| ' + test['@_name'] + ' | ' + test.failure['@_message'] + ' | \n';
-                table.push([test['@_name'], test.failure['@_message']]);
-            }
-            if (test.error) {
-                markdown += '| ' + test['@_name'] + ' | ' + test.error['@_message'] + ' | \n';
-                table.push([test['@_name'], test.error['@_message']]);
-            }
-            if (test.skipped) {
-                markdown += '| ' + test['@_name'] + ' | ' + test.skipped['@_message'] + ' | \n';
-                table.push([test['@_name'], test.skipped['@_message']]);
-            }
+    let testCases = json.testsuites.testsuite.testcase;
+    if (!testCases.length) {
+        testCases = [testCases];
+    }
 
-
-        });
-    } else {
-        let test = json.testsuites.testsuite.testcase;
+    testCases.forEach(test => {
         if (test.failure) {
             markdown += '| ' + test['@_name'] + ' | ' + test.failure['@_message'] + ' | \n';
             table.push([test['@_name'], test.failure['@_message']]);
@@ -284,7 +271,9 @@ function runTests(inputs) {
             markdown += '| ' + test['@_name'] + ' | ' + test.skipped['@_message'] + ' | \n';
             table.push([test['@_name'], test.skipped['@_message']]);
         }
-    }
+
+
+    });
 
     if (markdown != '') {
         markdown = '| Test | Failure |\n| --- | --- |\n' + markdown + '\n';
