@@ -157,6 +157,7 @@ function runTests(inputs) {
     }
 
     const testCommand = `${runCommand} --junitxml=.unittest-results.xml`;
+    console.log(testCommand);
 
     let errorMessage = '';
     try {
