@@ -83,6 +83,24 @@ function setup(inputs) {
     };
 
 
+    // Install pytest
+    try {
+        execSync('pip install pytest', { env });
+    } catch (e) {
+        core.setFailed('Failed to install pytest');
+
+        console.error('Failed to install pytest');
+        console.error('Error:', e.message);
+
+        result.markdown = btoa('**Error:** Failed to install pytest\n\n```\n' + e.message + '\n```');
+        result.tests[0].message = e.message;
+        result.tests[0].test_code = 'pip install pytest';
+
+        core.setOutput('result', btoa(JSON.stringify(result)));
+
+        return false;
+    }
+
     // Install from requirements.txt, if exists
     try {
         if (fs.existsSync('requirements.txt')) {
