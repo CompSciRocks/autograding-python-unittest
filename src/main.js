@@ -210,6 +210,8 @@ function runTests(inputs) {
     let skippedCount = parseInt(json.testsuites.testsuite['@_skipped']);
     let time = parseFloat(json.testsuites.testsuite['@_time']);
 
+    console.log(testCount, failureCount, errorCount, skippedCount, time);
+
     if (testCount < 1) {
         core.setFailed('No tests found');
 
