@@ -195,7 +195,7 @@ function runTests(inputs) {
     // Let's parse the xml
     const data = fs.readFileSync('.unittest-results.xml', 'utf8');
 
-    console.log(data); // just for now
+    // console.log(data); // just for now
 
     const parser = new XMLParser({
         ignoreAttributes: false,
@@ -204,11 +204,11 @@ function runTests(inputs) {
 
     let json = parser.parse(data);
 
-    let testCount = json.testsuite['@_tests'];
-    let failureCount = json.testsuite['@_failures'];
-    let errorCount = json.testsuite['@_errors'];
-    let skippedCount = json.testsuite['@_skipped'];
-    let time = json.testsuite['@_time'];
+    let testCount = json.testsuites.testsuite['@_tests'];
+    let failureCount = json.testsuites.testsuite['@_failures'];
+    let errorCount = json.testsuites.testsuite['@_errors'];
+    let skippedCount = json.testsuites.testsuite['@_skipped'];
+    let time = json.testsuites.testsuite['@_time'];
 
     if (testCount < 1) {
         core.setFailed('No tests found');
