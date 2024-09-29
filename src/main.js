@@ -298,7 +298,7 @@ function runTests(inputs) {
         markdown: btoa(markdown),
         tests: [{
             name: inputs.testName || 'Unknown test',
-            status: 'pass',
+            status: totalFailed > 0 ? 'fail' : 'pass',
             message: '',
             score: testScore,
             filename: '',
