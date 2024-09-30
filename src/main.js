@@ -16,7 +16,7 @@ function getInputs() {
     const testName = core.getInput('test-name');
     const testClass = core.getInput('test-class');
     const setupCommand = core.getInput('setup-command');
-    const timeout = parseInt(core.getInput('timeout'));
+    const timeout = parseFloat(core.getInput('timeout') || 5) * 60_000 // Minutes to milliseconds
     const maxScore = parseFloat(core.getInput('max-score'));
     const partialCredit = core.getInput('partial-credit');
     const testDir = core.getInput('test-dir');
@@ -85,7 +85,7 @@ function setup(inputs) {
 
     // Install pytest
     try {
-        execSync('pip install pytest', { env });
+        execSync('pip install pytest', { timeout: inputs.timeout, env });
     } catch (e) {
         core.setFailed('Failed to install pytest');
 
@@ -104,7 +104,7 @@ function setup(inputs) {
     // Install from requirements.txt, if exists
     try {
         if (fs.existsSync('requirements.txt')) {
-            execSync('pip install -r requirements.txt', { env });
+            execSync('pip install -r requirements.txt', { timeout: inputs.timeout, env });
         }
     } catch (e) {
         core.setFailed('Failed to install requirements');
@@ -124,7 +124,7 @@ function setup(inputs) {
     // Run setup command, if exists
     try {
         if (inputs.setupCommand) {
-            execSync(inputs.setupCommand, { env });
+            execSync(inputs.setupCommand, { timeout: inputs.timeout, env });
         }
     } catch (e) {
         core.setFailed('Failed to run setup command');
@@ -161,7 +161,7 @@ function runTests(inputs) {
 
     let errorMessage = '';
     try {
-        execSync(testCommand, { env });
+        execSync(testCommand, { timeout: inputs.timeout, env });
     } catch (error) {
         // Ignore the error here since it might mean failed tests. Check for .unittest-results.xml
         // to determine if the command failed or not. 
