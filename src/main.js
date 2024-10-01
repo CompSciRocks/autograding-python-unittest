@@ -86,7 +86,7 @@ function setup(inputs) {
     // Activate virtualenv
     try {
         console.log('Activating virtual envioronment');
-        execSync('./venv/bin/activate', { env });
+        execSync('.venv/bin/activate', { env });
         execSync('echo PATH=$PATH >> $GITHIB_ENV', { env });
     } catch (e) {
         core.setFailed('Failed to activate virtualenv');
@@ -96,7 +96,7 @@ function setup(inputs) {
 
         result.markdown = btoa('**Error:** Failed to activate virtualenv\n\n```\n' + e.message + '\n```');
         result.tests[0].message = e.message;
-        result.tests[0].test_code = './venv/bin/activate';
+        result.tests[0].test_code = '.venv/bin/activate';
 
         core.setOutput('result', btoa(JSON.stringify(result)));
 
