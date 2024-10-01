@@ -85,7 +85,7 @@ function setup(inputs) {
 
     // Install pytest
     try {
-        execSync('pip install pytest --break-system-packages', { timeout: inputs.timeout, env });
+        execSync('3pip install pytest --break-system-packages', { timeout: inputs.timeout, env });
     } catch (e) {
         core.setFailed('Failed to install pytest');
 
@@ -104,7 +104,7 @@ function setup(inputs) {
     // Install from requirements.txt, if exists
     try {
         if (fs.existsSync('requirements.txt')) {
-            execSync('pip install -r requirements.txt --break-system-packages', { timeout: inputs.timeout, env });
+            execSync('pip3 install -r requirements.txt --break-system-packages', { timeout: inputs.timeout, env });
         }
     } catch (e) {
         core.setFailed('Failed to install requirements');
