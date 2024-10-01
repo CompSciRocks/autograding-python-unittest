@@ -83,29 +83,9 @@ function setup(inputs) {
     };
 
 
-    // Activate virtualenv
-    try {
-        console.log('Activating virtual envioronment');
-        execSync('.venv/bin/activate', { env });
-        execSync('echo PATH=$PATH >> $GITHIB_ENV', { env });
-    } catch (e) {
-        core.setFailed('Failed to activate virtualenv');
-
-        console.error('Failed to activate virtualenv');
-        console.error('Error:', e.message);
-
-        result.markdown = btoa('**Error:** Failed to activate virtualenv\n\n```\n' + e.message + '\n```');
-        result.tests[0].message = e.message;
-        result.tests[0].test_code = '.venv/bin/activate';
-
-        core.setOutput('result', btoa(JSON.stringify(result)));
-
-        return false;
-    }
-
     // Install pytest
     try {
-        execSync('pip install pytest', { timeout: inputs.timeout, env });
+        execSync('pip install pytest --break-system-packages', { timeout: inputs.timeout, env });
     } catch (e) {
         core.setFailed('Failed to install pytest');
 
@@ -114,7 +94,7 @@ function setup(inputs) {
 
         result.markdown = btoa('**Error:** Failed to install pytest\n\n```\n' + e.message + '\n```');
         result.tests[0].message = e.message;
-        result.tests[0].test_code = 'pip install pytest';
+        result.tests[0].test_code = 'pip install pytest --break-system-packages';
 
         core.setOutput('result', btoa(JSON.stringify(result)));
 
@@ -124,17 +104,17 @@ function setup(inputs) {
     // Install from requirements.txt, if exists
     try {
         if (fs.existsSync('requirements.txt')) {
-            execSync('pip install -r requirements.txt', { timeout: inputs.timeout, env });
+            execSync('pip install -r requirements.txt --break-system-packages', { timeout: inputs.timeout, env });
         }
     } catch (e) {
         core.setFailed('Failed to install requirements');
 
-        console.error('Failed to install requirements from requirements.txt');
+        console.error('Failed to install requirements from requirements.txt --break-system-packages');
         console.error('Error:', e.message);
 
         result.markdown = btoa('**Error:** Failed to install requirements from requirements.txt\n\n```\n' + e.message + '\n```');
         result.tests[0].message = e.message;
-        result.tests[0].test_code = 'pip install -r requirements.txt';
+        result.tests[0].test_code = 'pip install -r requirements.txt --break-system-packages';
 
         core.setOutput('result', btoa(JSON.stringify(result)));
 
