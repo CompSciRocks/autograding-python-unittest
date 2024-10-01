@@ -85,7 +85,7 @@ function setup(inputs) {
 
     // Install pytest
     try {
-        execSync('3pip install pytest --break-system-packages', { timeout: inputs.timeout, env });
+        execSync('pip3 install pytest --break-system-packages', { timeout: inputs.timeout, env });
     } catch (e) {
         core.setFailed('Failed to install pytest');
 
